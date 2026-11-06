@@ -1,0 +1,25 @@
+name: Build on macOS and Windows
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+      - name: Verify (macOS)
+        if: runner.os != 'Windows'
+        run: ./mvnw --batch-mode --no-transfer-progress verify
+      - name: Verify (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: .\mvnw.cmd --batch-mode --no-transfer-progress verify

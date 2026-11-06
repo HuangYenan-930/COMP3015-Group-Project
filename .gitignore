@@ -1,0 +1,21 @@
+# Each developer keeps their own IDE and operating-system settings.
+.idea/
+*.iml
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+# Generated code and local dependencies.
+**/target/
+**/out/
+*.class
+javafx-sdk-*/
+**/javafx-sdk-*/
+**/lib/
+# Local runtime scores must not be committed.
+**/data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.log
